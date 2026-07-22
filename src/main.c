@@ -1,8 +1,9 @@
 #include <stdbool.h>
 #include <time.h>
 #include <ncurses.h>
-#include "draw.h"
+#include "statusbar.h"
 #include "clock.h"
+#include "battery.h"
 
 int main(void) 
 {
@@ -22,6 +23,7 @@ int main(void)
     char clock[16]; 
     char date[32];
     Wifi wifi = {0};
+    Battery battery = {0};
 
     while(running)
     {
@@ -33,7 +35,8 @@ int main(void)
             get_time_string(clock, sizeof(clock));
             get_date_string(date, sizeof(date));
             wifi_update(&wifi);
-            draw_statusbar(date, clock, &wifi);
+            battery_update(&battery);
+            draw_statusbar(date, clock, &wifi, &battery);
             refresh();
         }
         int ch = getch();

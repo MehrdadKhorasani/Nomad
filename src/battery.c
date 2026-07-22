@@ -12,9 +12,9 @@ void battery_update(Battery *bat)
         bat->status[0] = '\0';
         return;
     }
-    int percent = 0;
-    bat->percent = percent;
 
-    fscanf(fp, "%d", &bat->percent);
+    if (fscanf(fp, "%d", &bat->percent) != 1)
+        bat->percent = -1;
+
     fclose(fp);
 }

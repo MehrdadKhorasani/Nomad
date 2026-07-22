@@ -18,8 +18,10 @@ void draw_statusbar(const char *date,
         mvprintw(0, COLS - 22, "Wifi:%2d%%", wifi->quality);
     else
         mvprintw(0, COLS - 22, "Wifi:--");
-    if(bat->percent)
+    if(bat->percent >= 0)
         mvprintw(0,COLS - 33, "[%d%%]", bat->percent);
+    else
+        mvprintw(0, COLS - 33, "[--]");
     mvprintw(0,COLS - 10, "%s", time);
     mvhline(1, 0, ACS_HLINE, COLS);
 }
